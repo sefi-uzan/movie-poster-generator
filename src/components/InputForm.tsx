@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 type InputFormProps = {
   onSubmit: (input: string) => void;
 };
 
 const InputForm: React.FC<InputFormProps> = ({ onSubmit }) => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   const handleClick = () => {
     onSubmit(input);
   };
 
   return (
-    <div className='w-full flex space-x-2 justify-center'>
+    <div className="flex w-full justify-center space-x-2">
       <input
         type="text"
         value={input}

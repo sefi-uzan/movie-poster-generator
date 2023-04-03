@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { chromium } from 'playwright';
-import { createTRPCRouter, publicProcedure } from '@/server/api/trpc';
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { chromium } from "playwright";
+import { z } from "zod";
 
 export const generatePdfRouter = createTRPCRouter({
   generatePdf: publicProcedure
@@ -13,7 +13,7 @@ export const generatePdfRouter = createTRPCRouter({
           Actors: z.string(),
           Poster: z.string(),
         }),
-      }),
+      })
     )
     .query(async ({ input }) => {
       const { movieData } = input;
@@ -30,12 +30,15 @@ export const generatePdfRouter = createTRPCRouter({
       </div>`;
 
       await page.setContent(htmlContent);
-      const pdfBuffer = await page.pdf({ format: 'A4' , path: `${movieData.Title}.pdf`});
+      const pdfBuffer = await page.pdf({
+        format: "A4",
+        path: `${movieData.Title}.pdf`,
+      });
 
       await browser.close();
 
       return {
-        pdfBuffer: pdfBuffer.toString('base64')
+        pdfBuffer: pdfBuffer.toString("base64"),
       };
     }),
 });
